@@ -84,6 +84,17 @@ def view_contacts():
     print(tabulate(contacts, headers="keys", tablefmt="fancy_grid"))
 
 #-----------------------------------------------------------------------
+#  option [3] Search contacts by name
+#-----------------------------------------------------------------------
+
+def search_contacts():
+
+    search_term = input("Enter search name:").lower()
+
+    searched_list = [contact for contact in contacts if search_term in contacts['name'].lower()]
+    print(tabulate(contacts, headers="keys", tablefmt="fancy_grid"))
+
+#-----------------------------------------------------------------------
 #   # while loop to get user input
 #-----------------------------------------------------------------------
 
@@ -98,7 +109,9 @@ while True:
         add_contact()
         write_json()
     elif option == '2':
-        view_contacts()    
+        view_contacts()
+    elif option == '3': 
+        search_contacts()     
 
     else:
         print("Invalid action. Please try again.")
