@@ -29,6 +29,7 @@ def show_menu():
     print("Welcome to Contact Manager!")
     print("[0] Exit")
     print("[1] Add Contact")
+    print("[2] View All Contacts")
 
 
 #-----------------------------------------------------------------------
@@ -75,6 +76,12 @@ def write_json():
         json.dump(contacts, file, indent=4)
         
 
+#-----------------------------------------------------------------------
+#   option [2] View All Contacts
+#-----------------------------------------------------------------------
+def view_contacts():
+    print("All Contracts:")
+    print(tabulate(contacts, headers="keys", tablefmt="fancy_grid"))
 
 #-----------------------------------------------------------------------
 #   # while loop to get user input
@@ -89,7 +96,9 @@ while True:
         break    
     elif option == '1':
         add_contact()
-        write_json()    
+        write_json()
+    elif option == '2':
+        view_contacts()    
 
     else:
         print("Invalid action. Please try again.")
