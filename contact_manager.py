@@ -30,6 +30,8 @@ def show_menu():
     print("[0] Exit")
     print("[1] Add Contact")
     print("[2] View All Contacts")
+    print("[3] Search Contacts")
+    print("[4] Delete Contact") 
 
 
 #-----------------------------------------------------------------------
@@ -39,7 +41,7 @@ def add_contact():
 
     while True:
         try:
-            name = ("Enter name:").lower()
+            name = input("Enter full name:").lower()
             break
         except ValueError:
             print("Invalid entry. Please try again.")
@@ -54,7 +56,7 @@ def add_contact():
 
     while True:
         try:
-            email = ("Enter email:").lower()
+            email = input("Enter email:").lower()
             break
         except ValueError:
             print("Invalid entry. Please try again.")
@@ -80,7 +82,7 @@ def write_json():
 #   option [2] View All Contacts
 #-----------------------------------------------------------------------
 def view_contacts():
-    print("All Contracts:")
+    print("Displaying All Contacts:")
     print(tabulate(contacts, headers="keys", tablefmt="fancy_grid"))
 
 #-----------------------------------------------------------------------
@@ -89,13 +91,38 @@ def view_contacts():
 
 def search_contacts():
 
-    search_term = input("Enter search name:").lower()
+    search_term = input("Enter search name: ").lower()
 
-    searched_list = [contact for contact in contacts if search_term in contacts['name'].lower()]
-    print(tabulate(contacts, headers="keys", tablefmt="fancy_grid"))
+    searched_list = [contact for contact in contacts if search_term in contact['name'].lower()]
+    if searched_list:
+        print(tabulate(searched_list, headers="keys", tablefmt="fancy_grid"))
+    else:
+        print('No contacts found.')
 
 #-----------------------------------------------------------------------
-#   # while loop to get user input
+#  option [4] Delete Contact
+#-----------------------------------------------------------------------
+
+def delete_contact():
+    view_contacts()
+    
+    while True:               
+        try:
+            choice = str(input("Enter name of contact to delete: ").lower())
+            match = next((contact for contact in contacts if contact.get("name") == choice), None)
+            if match:
+                print(f'Contact information for {choice} removed')
+                contacts.remove(match)
+                break
+            else:
+                print('Name does not match existing contacts')
+                    
+        except ValueError:
+            print("Invalid entry. Please try again.")
+
+
+#-----------------------------------------------------------------------
+#   while loop to get user input
 #-----------------------------------------------------------------------
 
 while True:
@@ -111,7 +138,10 @@ while True:
     elif option == '2':
         view_contacts()
     elif option == '3': 
-        search_contacts()     
+        search_contacts()
+    elif option == '4':
+        delete_contact()
+        write_json     
 
     else:
         print("Invalid action. Please try again.")
