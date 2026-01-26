@@ -41,15 +41,21 @@ def add_contact():
 
     while True:
         try:
-            name = input("Enter full name:").lower()
-            break
+            name = str(input("Enter full name:").lower())
+            if name == "":
+                print("Blank is invalid entry. Please try again.")
+            else:
+                break                
         except ValueError:
             print("Invalid entry. Please try again.")
 
     while True:        
         try:
             phone = int(input("Enter phone number: "))
-            break            
+            if phone == "":
+                print("Blank is invalid entry. Please try again.")
+            else:
+                break            
 
         except ValueError:
             print("Invalid number. Please try again.")
@@ -57,7 +63,10 @@ def add_contact():
     while True:
         try:
             email = input("Enter email:").lower()
-            break
+            if email == "":
+                print("Blank is invalid entry. Please try again.")
+            else:
+                break        
         except ValueError:
             print("Invalid entry. Please try again.")
 
@@ -112,6 +121,7 @@ def delete_contact():
                 break
             else:
                 print('Name does not match existing contacts')
+                break
                     
         except ValueError:
             print("Invalid entry. Please try again.")
