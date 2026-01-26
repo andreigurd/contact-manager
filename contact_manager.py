@@ -65,6 +65,8 @@ def add_contact():
             email = input("Enter email:").lower()
             if email == "":
                 print("Blank is invalid entry. Please try again.")
+            elif "@" not in email:
+                print("Invalid email format. Please try again.")
             else:
                 break        
         except ValueError:
