@@ -70,13 +70,7 @@ def add_contact():
     contacts.append(contact_item)
     print(f'Contact for {name} added.')
 
-#-----------------------------------------------------------------------
-#   function to write to contacts json
-#-----------------------------------------------------------------------
-def write_json():
-    with open('contacts.json', 'w') as file:
-        json.dump(contacts, file, indent=4)
-        
+
 
 #-----------------------------------------------------------------------
 #   option [2] View All Contacts
@@ -94,6 +88,8 @@ def search_contacts():
     search_term = input("Enter search name: ").lower()
 
     searched_list = [contact for contact in contacts if search_term in contact['name'].lower()]
+
+    #print(tabulate(searched_list, headers="keys", tablefmt="fancy_grid"))
     if searched_list:
         print(tabulate(searched_list, headers="keys", tablefmt="fancy_grid"))
     else:
@@ -122,6 +118,14 @@ def delete_contact():
 
 
 #-----------------------------------------------------------------------
+#   function to write to contacts json
+#-----------------------------------------------------------------------
+def write_json():
+    with open('contacts.json', 'w') as file:
+        json.dump(contacts, file, indent=4)
+        
+
+#-----------------------------------------------------------------------
 #   while loop to get user input
 #-----------------------------------------------------------------------
 
@@ -145,3 +149,4 @@ while True:
 
     else:
         print("Invalid action. Please try again.")
+
