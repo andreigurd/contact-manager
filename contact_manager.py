@@ -1,6 +1,6 @@
 import json
 from tabulate import tabulate
-
+from datetime import datetime,date,timedelta
 #-----------------------------------------------------------------------
 #   opening expenses json file
 #-----------------------------------------------------------------------
@@ -20,18 +20,66 @@ except PermissionError:
     print("Need permission to access Contacts file. Blank Contacts list created.")
     contacts = []
 
+
+
+
+
+#-----------------------------------------------------------------------
+#   welcome title and display next upcoming bday
+#-----------------------------------------------------------------------
+print("")
+print("Welcome to Contact Manager!")
+# display contact with closest bday
+
+upcoming_bdays = []
+for contact in contacts:
+    if contact['birthday'] != "N/A":
+        today = date.today()
+        
+        bday_str = (contact['birthday'])
+    
+        # parse bday string to date object.
+        bday_date = date.strptime(bday_str, "%Y-%m-%d")
+        # class datetime.date(year, month, day) All arguments are required.        
+                
+        # convert bday object to this year for comparison to today.
+        bday_this_year = date(today.year, bday_date.month, bday_date.day) 
+
+        date_difference = bday_this_year - today
+        # note subtracting two date objects returns a time.delta object.       
+        
+        days_away = {
+            "name" : contact['name'],
+            "days to birthday" : date_difference.days,
+            "converted birthday" : bday_this_year
+        }
+        if bday_this_year == today or date_difference.days > 0:
+            upcoming_bdays.append(days_away)
+    else:
+        continue
+
+    
+sorted_bdays = sorted(upcoming_bdays, key=lambda contact: contact["days to birthday"])
+closest_bday = sorted_bdays[0] # note [0:N] creates a list not a dictionary
+
+
+
+if closest_bday['days to birthday'] == 0:
+    print(f"{closest_bday['name']}'s birthday is today!")
+else:
+    print(f"{closest_bday['name']}'s birthday is {closest_bday['days to birthday']} days away on {closest_bday['converted birthday'].month}/{closest_bday['converted birthday'].day}") 
+
+
 #-----------------------------------------------------------------------
 #   showing menu
 #-----------------------------------------------------------------------
 
-def show_menu():
-    print("")
-    print("Welcome to Contact Manager!")
+def show_menu():    
     print("[0] Exit")
     print("[1] Add Contact")
     print("[2] View All Contacts")
     print("[3] Search Contacts")
-    print("[4] Delete Contact") 
+    print("[4] Delete Contact")   
 
 
 #-----------------------------------------------------------------------
@@ -51,7 +99,7 @@ def add_contact():
 
     while True:        
         try:
-            phone = int(input("Enter phone number: "))
+            phone = input("Enter phone number: ")
             if phone == "":
                 print("Blank is invalid entry. Please try again.")
             else:
@@ -71,11 +119,31 @@ def add_contact():
                 break        
         except ValueError:
             print("Invalid entry. Please try again.")
+    
+    while True:        
+        try:
+            bday = "N/A"
+            choice = input("Do you want to enter a birthday, Yes or No: ").lower()
+            if choice == "no":
+                break
+            elif choice == "":
+                print("Blank is invalid entry. Please try again.")
+            elif choice == "yes":
+                bday = str(input("Enter birthday in (yyyy-mm-dd format): "))
+                break
+            else:
+                print("Invalid entry. Please try again.")
+
+
+    #xpense_date = datetime.strptime(expense['date'], "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            print("Invalid number. Please try again.")
 
     contact_item = {
         "name": name,
         "phone": phone,
-        "email": email
+        "email": email,
+        "birthday": bday
     }
 
     contacts.append(contact_item)
