@@ -1,0 +1,32 @@
+[
+    {
+        "name": "john doe",
+        "phone": "509-867-5309",
+        "email": "john@aol.com",
+        "birthday": "1999-06-01"
+    },
+    {
+        "name": "john smith",
+        "phone": "905-867-5309",
+        "email": "john@gmail.com",
+        "birthday": "2025-03-01"
+    },
+    {
+        "name": "jane",
+        "phone": "555-123-4567",
+        "email": "jane.doe@apple.com",
+        "birthday": "2022-02-01"
+    },
+    {
+        "name": "bob",
+        "phone": "101-765-4321",
+        "email": "bob@yahoo.com",
+        "birthday": "2026-04-30"
+    },
+    {
+        "name": "robert",
+        "phone": "555-987-6543",
+        "email": "robert.smith@random.net",
+        "birthday": "N/A"
+    }
+]

@@ -81,7 +81,8 @@ def show_menu():
     print("[1] Add Contact")
     print("[2] View All Contacts")
     print("[3] Search Contacts")
-    print("[4] Delete Contact")   
+    print("[4] Delete Contact")
+    print("[5] Export to text file")    
 
 
 #-----------------------------------------------------------------------
@@ -202,13 +203,11 @@ def delete_contact():
 #  option [5] export to markdown text file
 #-----------------------------------------------------------------------
 def export_text():
-    with open('2026-02-3 contacts.md', 'w') as file:
-        file.write("Name,Phone,Email,Birthday\n")
-        for contact in contacts:
-            file.write(f"{contact['name']},{contact['phone']},{contact['email']},{contact['birthday']}\n")
+    with open('2026-02-3 contacts.txt', 'w') as file:
+        json.dump(contacts, file, indent=4)
     
     file_path = os.path.abspath('2026-02-3 contacts.md')
-    print(f"Markdown (md) file exported to:\n{file_path}")
+    print(f"Text file exported to:\n{file_path}")
     
 #-----------------------------------------------------------------------
 #   function to write to contacts json
