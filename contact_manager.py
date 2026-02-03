@@ -1,6 +1,8 @@
 import json
 from tabulate import tabulate
 from datetime import datetime,date,timedelta
+import os
+
 #-----------------------------------------------------------------------
 #   opening expenses json file
 #-----------------------------------------------------------------------
@@ -89,7 +91,7 @@ def add_contact():
 
     while True:
         try:
-            name = str(input("Enter full name:").lower())
+            name = str(input("Enter contact name: ").lower())
             if name == "":
                 print("Blank is invalid entry. Please try again.")
             else:
@@ -110,7 +112,7 @@ def add_contact():
 
     while True:
         try:
-            email = input("Enter email:").lower()
+            email = input("Enter email: ").lower()
             if email == "":
                 print("Blank is invalid entry. Please try again.")
             elif "@" not in email:
@@ -129,7 +131,7 @@ def add_contact():
             elif choice == "":
                 print("Blank is invalid entry. Please try again.")
             elif choice == "yes":
-                bday = str(input("Enter birthday in (yyyy-mm-dd format): "))
+                bday = str(input("Enter birthday in (yyyy-mm-dd) format: "))
                 break
             else:
                 print("Invalid entry. Please try again.")
@@ -196,7 +198,18 @@ def delete_contact():
         except ValueError:
             print("Invalid entry. Please try again.")
 
-
+#-----------------------------------------------------------------------
+#  option [5] export to markdown text file
+#-----------------------------------------------------------------------
+def export_text():
+    with open('2026-02-3 contacts.md', 'w') as file:
+        file.write("Name,Phone,Email,Birthday\n")
+        for contact in contacts:
+            file.write(f"{contact['name']},{contact['phone']},{contact['email']},{contact['birthday']}\n")
+    
+    file_path = os.path.abspath('2026-02-3 contacts.md')
+    print(f"Markdown (md) file exported to:\n{file_path}")
+    
 #-----------------------------------------------------------------------
 #   function to write to contacts json
 #-----------------------------------------------------------------------
@@ -225,7 +238,9 @@ while True:
         search_contacts()
     elif option == '4':
         delete_contact()
-        write_json     
+        write_json
+    elif option == '5':
+        export_text()
 
     else:
         print("Invalid action. Please try again.")
