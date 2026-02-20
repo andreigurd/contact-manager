@@ -34,7 +34,7 @@ python contact_manager.py
 
 ## 🧠 What I Learned
 - Exporting to text file was valuable as it provided a cleaner more readable format than CSV for this application.
-- How to implement an upcoming date detection feature. The challenge of this was to insure the stored  and how it challenged me
+- How to implement an upcoming date detection feature. The challenge of this was to insure the stored date and date now were both in the same format to allow comparison.
 - How to validate input to ensure @ was included for valid email. I would do this differently and include requirement for valid input for the website.
 - To create files from VS Code terminal directly.
 - How to use .gitignore file to specify what files to ignore and to not put on GitHub.
