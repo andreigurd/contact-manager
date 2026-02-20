@@ -68,7 +68,8 @@ else:
 #   showing menu
 #-----------------------------------------------------------------------
 
-def show_menu():    
+def show_menu():
+    print("")    
     print("[0] Exit")
     print("[1] Add Contact")
     print("[2] View All Contacts")
@@ -185,7 +186,7 @@ def delete_contact():
             print("Invalid entry. Please try again.")
 
 #-----------------------------------------------------------------------
-#  option [5] export to markdown text file
+#  option [5] export to text file
 #-----------------------------------------------------------------------
 def export_text():
     with open('2026-02-3 contacts.txt', 'w') as file:
@@ -221,7 +222,7 @@ while True:
         search_contacts()
     elif option == '4':
         delete_contact()
-        write_json
+        write_json()
     elif option == '5':
         export_text()
     else:
