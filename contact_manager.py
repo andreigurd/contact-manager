@@ -22,10 +22,6 @@ except PermissionError:
     print("Need permission to access Contacts file. Blank Contacts list created.")
     contacts = []
 
-
-
-
-
 #-----------------------------------------------------------------------
 #   welcome title and display next upcoming bday
 #-----------------------------------------------------------------------
@@ -59,18 +55,14 @@ for contact in contacts:
             upcoming_bdays.append(days_away)
     else:
         continue
-
     
 sorted_bdays = sorted(upcoming_bdays, key=lambda contact: contact["days to birthday"])
 closest_bday = sorted_bdays[0] # note [0:N] creates a list not a dictionary
-
-
 
 if closest_bday['days to birthday'] == 0:
     print(f"{closest_bday['name']}'s birthday is today!")
 else:
     print(f"{closest_bday['name']}'s birthday is {closest_bday['days to birthday']} days away on {closest_bday['converted birthday'].month}/{closest_bday['converted birthday'].day}") 
-
 
 #-----------------------------------------------------------------------
 #   showing menu
@@ -82,8 +74,7 @@ def show_menu():
     print("[2] View All Contacts")
     print("[3] Search Contacts")
     print("[4] Delete Contact")
-    print("[5] Export to text file")    
-
+    print("[5] Export to text file")   
 
 #-----------------------------------------------------------------------
 #   option [1] Add Contact
@@ -106,8 +97,7 @@ def add_contact():
             if phone == "":
                 print("Blank is invalid entry. Please try again.")
             else:
-                break            
-
+                break          
         except ValueError:
             print("Invalid number. Please try again.")
 
@@ -136,9 +126,7 @@ def add_contact():
                 break
             else:
                 print("Invalid entry. Please try again.")
-
-
-    #xpense_date = datetime.strptime(expense['date'], "%Y-%m-%d %H:%M:%S")
+    
         except ValueError:
             print("Invalid number. Please try again.")
 
@@ -151,8 +139,6 @@ def add_contact():
 
     contacts.append(contact_item)
     print(f'Contact for {name} added.')
-
-
 
 #-----------------------------------------------------------------------
 #   option [2] View All Contacts
@@ -171,7 +157,6 @@ def search_contacts():
 
     searched_list = [contact for contact in contacts if search_term in contact['name'].lower()]
 
-    #print(tabulate(searched_list, headers="keys", tablefmt="fancy_grid"))
     if searched_list:
         print(tabulate(searched_list, headers="keys", tablefmt="fancy_grid"))
     else:
@@ -214,8 +199,7 @@ def export_text():
 #-----------------------------------------------------------------------
 def write_json():
     with open('contacts.json', 'w') as file:
-        json.dump(contacts, file, indent=4)
-        
+        json.dump(contacts, file, indent=4)        
 
 #-----------------------------------------------------------------------
 #   while loop to get user input
@@ -240,7 +224,6 @@ while True:
         write_json
     elif option == '5':
         export_text()
-
     else:
         print("Invalid action. Please try again.")
 
